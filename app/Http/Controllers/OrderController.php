@@ -98,10 +98,14 @@ class OrderController extends Controller
         {
             $order->feedback = $request->feedback;
         }
-        else {
+       if($request->has('status')){
             $order->status = $request->status;
-            $order->amount = $request->amount;
         }
+
+       if($request->has('amount'))
+       {
+           $order->amount = $request->amount;
+       }
         $order->save();
         return redirect()->back();
     }

@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Fabric;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FabricController extends Controller
 {
+
+    public function __construct()
+    {
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +21,10 @@ class FabricController extends Controller
      */
     public function index()
     {
+        if(!Auth::user()->can('admin'))
+        {
+            return redirect('/') ;
+        }
         $colors = ['alizarin',
             'amaranth',
             'amber',

@@ -15,14 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['middleware'=>'auth'],function(){
     Route::resource('/tailors', App\Http\Controllers\TailorController::class);
     Route::resource('/fabrics', App\Http\Controllers\FabricController::class);
     Route::resource('/orders', App\Http\Controllers\OrderController::class);
-});
-Route::get('/test',function (){
-   $orders =  \App\Models\Tailor::all();
-   dd($orders);
 });

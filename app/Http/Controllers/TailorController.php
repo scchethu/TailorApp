@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\RoleUser;
+use App\Models\Tailor;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class TailorController extends Controller
 {
@@ -14,11 +17,19 @@ class TailorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+public function __construct()
+{
+    $this->middleware('auth');
+
+}
+
     public function index()
     {
-        $users  = User::whereHas('roles',function ($query){
-           return $query->where('role_id',3);
-        })->get();
+        if(!Auth::user()->can('admin'))
+        {
+            return redirect('/') ;
+        }
+        $users  = Tailor::all();
         return view('tailor.index',compact('users'));
     }
 
@@ -41,7 +52,9 @@ class TailorController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::create($request->all());
+        $requests = $request->all();
+        $requests['password'] = Hash::make($requests['password']);
+        $user = User::create($requests);
         $user->roles()->sync(3);
         return redirect()->route('tailors.index');
     }
