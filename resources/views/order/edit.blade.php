@@ -9,7 +9,7 @@
 @section('content')
     <div class="col-6 card mx-auto p-3">
         <div class="card-title">
-            Order Details
+         <h2>   Order Details</h2>
         </div>
         <div class="img">
             <img class="img-fluid" src="{{asset(str_replace("public","storage",$order->fabric->image))}}" alt="">

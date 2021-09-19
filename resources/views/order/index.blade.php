@@ -11,7 +11,7 @@
         $heads = [
             'ID',
             'fabric Type',
-            ['label' => 'Tailor', 'width' => 40],
+            ['label' => 'Tailor/Customer', 'width' => 40],
             ['label' => 'Order Status', 'no-export' => true, 'width' => 5],
             'View'
         ];
@@ -27,7 +27,12 @@
 
                     <td>{{$order->id}}</td>
                     <td>{{$order->fabric->type}}</td>
+                  @can('user')
                     <td>{{$order->tailor->name}}</td>
+                @endcan
+                @can('tailor')
+                    <td>{{$order->user->name}}</td>
+                @endcan
                     <td>{{$order->status}}</td>
                     <td><a href="{{route('orders.edit',$order->id)}}">View Order</a></td>
             </tr>
