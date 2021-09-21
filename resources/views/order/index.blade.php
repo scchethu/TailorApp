@@ -3,10 +3,21 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Tailors</h1>
+    <h1>Orders</h1>
+    @can('tailor')
+        <div class="float-right m-1">
+            <a class="btn btn-success" href="{{route('tailors.edit',\Illuminate\Support\Facades\Auth::id())}}">Profile</a>
+        </div>
+    @endcan
 @stop
 
 @section('content')
+
+        @if(session('error'))
+            <div class="alert alert-warning">
+                {{ session()->pull('error') }}
+            </div>
+            @endif
     @php
         $heads = [
             'ID',

@@ -18,15 +18,30 @@ class OrderController extends Controller
      */
     public function index()
     {
+
         $user = Auth::user();
         if($user->can('user')) {
             $orders = $user->orders;
+            return view('order.index',compact('orders'));
         }
         else
         {
-            $orders = Tailor::find($user->id)->orders;
+
+            $tailor = Tailor::find($user->id);
+            if(!$tailor->is_verified) {
+                $orders = [];
+                session()->put('error','Need verified by admin');
+            }
+            else
+            {
+                $orders = $tailor->orders;
+
+            }
+            return view('order.index',compact('orders'));
+
+
         }
-        return view('order.index',compact('orders'));
+
     }
 
     /**

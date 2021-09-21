@@ -59,6 +59,13 @@ public function __construct()
         return redirect()->route('tailors.index');
     }
 
+    public function approve($id)
+    {
+        $user = User::find($id);
+        $user->is_verified =true;
+        $user->save();
+        return redirect()->back();
+    }
     /**
      * Display the specified resource.
      *
@@ -78,7 +85,8 @@ public function __construct()
      */
     public function edit($id)
     {
-        //
+        $user = Tailor::find($id);
+        return view('tailor.edit',compact('user'));
     }
 
     /**

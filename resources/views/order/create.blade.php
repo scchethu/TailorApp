@@ -24,7 +24,7 @@
             <div class="form-group">
                 <label for="">Tailor</label>
                 <select class="form-control" name="tailor_id" id="">
-                    @foreach(\App\Models\Tailor::all() as $tailor)
+                    @foreach(\App\Models\Tailor::where('is_verified',true)->get() as $tailor)
                         <option value="{{$tailor->id}}">{{$tailor->name}}</option>
                     @endforeach
                 </select>

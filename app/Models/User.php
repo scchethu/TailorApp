@@ -46,18 +46,10 @@ class User extends Authenticatable implements OrderType
     public function roles() {
         return $this->belongsToMany(Role::class);
     }
-    public static function boot() {
 
-        parent::boot();
-
-        static::created(function($user) {
-            $user->roles()->sync(2);
-        });
-
-        static::creating(function($item) {
-            \Log::info('Item Creating Event:'.$item);
-        });
-
+    public function medias(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Media::class);
     }
 
 

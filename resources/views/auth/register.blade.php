@@ -60,7 +60,22 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="type" class="col-md-4 col-form-label text-md-right">Type</label>
 
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                <input id="type" class="form-check-input" checked type="radio" name="type"  value="tailor" required autocomplete="">
+                                    Tailor
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                <input id="type" class="form-check-input" type="radio" name="type"  value="user" required autocomplete="">
+                                    Customer
+                                </label>
+                            </div>
+                        </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
