@@ -13,7 +13,7 @@
         @method('put')
         <div class="form-group">
             <label for="">Name</label>
-            <input type="text" class="form-control" name="name" value="{{$user->name}}" placeholder="Tailor Name">
+            <input disabled type="text" class="form-control" name="name" value="{{$user->name}}" placeholder="Tailor Name">
         </div>
         <div class="form-group">
             <label for="">Email</label>
@@ -21,11 +21,11 @@
         </div>
         <div class="form-group">
             <label for="">Phone</label>
-            <input type="text" class="form-control" name="phone" value="{{$user->phone}}" placeholder="Phone Number">
+            <input disabled type="text" class="form-control" name="phone" value="{{$user->phone}}" placeholder="Phone Number">
         </div>
         <div class="form-group">
             <label for="">Shop Address</label>
-            <textarea class="form-control" name="address" id="" cols="30" rows="3"  placeholder="Shop Address">{{$user->address}}</textarea>
+            <textarea disabled="" class="form-control" name="address" id="" cols="30" rows="3"  placeholder="Shop Address">{{$user->address}}</textarea>
         </div>
     </form>
     <div>
