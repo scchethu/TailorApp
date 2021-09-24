@@ -105,9 +105,8 @@ class OrderController extends Controller
     {
 
         if($request->has('pay')) {
-            $order->status = Order::STATUS_PAID;
+            $order->status = Order::STATUS_PROCESSING;
             $order->is_paid = true;
-
         }
         if($request->has('feedback'))
         {
