@@ -23,6 +23,9 @@ class User extends Authenticatable implements OrderType
         'name',
         'email',
         'password',
+        'photo_url',
+        'phone',
+        'address'
     ];
 
     /**
@@ -47,10 +50,7 @@ class User extends Authenticatable implements OrderType
         return $this->belongsToMany(Role::class);
     }
 
-    public function medias(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Media::class);
-    }
+
 
 
     public function orders(): HasMany

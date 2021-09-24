@@ -18,6 +18,11 @@ class Tailor extends User implements OrderType
         return $this->HasMany(Order::class,'tailor_id');
     }
 
+
+    public function medias()
+    {
+        return $this->hasMany(Media::class,'user_id','id');
+    }
     public static function boot()
     {
         parent::boot();

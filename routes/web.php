@@ -19,6 +19,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['middleware'=>'auth'],function(){
     Route::resource('/tailors', App\Http\Controllers\TailorController::class);
+    Route::post('/tailors', [App\Http\Controllers\TailorController::class,'AddWork'])->name('tailors.add_work');
     Route::get('/approve/{id}', [App\Http\Controllers\TailorController::class,'approve']);
     Route::resource('/fabrics', App\Http\Controllers\FabricController::class);
     Route::resource('/orders', App\Http\Controllers\OrderController::class);

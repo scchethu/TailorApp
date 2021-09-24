@@ -11,8 +11,8 @@
         <div class="card-title">
          <h2>   Order Details</h2>
         </div>
-        <div class="img">
-            <img class="img-fluid" src="{{asset(str_replace("public","storage",$order->fabric->image))}}" alt="">
+        <div class="img mx-auto">
+            <img class="card p-3 m-3 img-fluid" style="height: 300px" src="{{asset(str_replace("public","storage",$order->fabric->image))}}" alt="">
         </div>
         <div>
             <span class="font-weight-bold">Fabric Type:</span>  {{$order->fabric->type}}
@@ -24,6 +24,10 @@
             <span class="font-weight-bold"> Order to :</span>  {{$order->tailor->name}}
         </div>
         <div>
+            <span class="font-weight-bold">Tailor's QR code :</span>
+            <img style="height: 200px" src="{{asset($order->tailor->photo_url)}}" alt="">
+        </div>
+        <div>
             <span class="font-weight-bold">Measurements :</span>
             {{json_decode($order->measurements)->data}}
         </div>
@@ -31,6 +35,7 @@
             <span class="font-weight-bold">Customer Name :</span>
             {{$order->user->name}}
         </div>
+
         <div>
             <span class="font-weight-bold">Customer Delivery Address :</span>
             {{$order->address}}

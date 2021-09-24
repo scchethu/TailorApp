@@ -22,12 +22,12 @@
                 <textarea  required class="form-control" name="address" id="" cols="30" rows="5" placeholder="Enter Address"></textarea>
             </div>
             <div class="form-group">
-                <label for="">Tailor</label>
-                <select class="form-control" name="tailor_id" id="">
-                    @foreach(\App\Models\Tailor::where('is_verified',true)->get() as $tailor)
-                        <option value="{{$tailor->id}}">{{$tailor->name}}</option>
-                    @endforeach
-                </select>
+                @foreach(\App\Models\Tailor::where('is_verified',true)->get() as $tailor)
+                <label for="">
+                    Tailor : {{$tailor->name}} <a target="_blank" href="{{route('tailors.show',$tailor->id)}}">View Profile</a>
+                    <input type="radio" value="{{$tailor->id}}" name="tailor_id">
+                </label>
+                @endforeach
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Place Order">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Media;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\Tailor;
@@ -53,9 +54,7 @@ public function __construct()
     public function store(Request $request)
     {
         $requests = $request->all();
-        $requests['password'] = Hash::make($requests['password']);
-        $user = User::create($requests);
-        $user->roles()->sync(3);
+
         return redirect()->route('tailors.index');
     }
 
@@ -74,7 +73,8 @@ public function __construct()
      */
     public function show($id)
     {
-        //
+        $user = Tailor::find($id);
+        return view('tailor.show',compact('user'));
     }
 
     /**
@@ -96,9 +96,35 @@ public function __construct()
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function AddWork(Request $request)
+    {
+        $requests = $request->all();
+        if($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $destinationPath = 'work';
+            $path  = $file->move($destinationPath,$file->getClientOriginalName());
+            $requests['media_url'] = $path->getPathname();
+            Media::create($requests);
+            return redirect()->back();
+        }
+    }
+
     public function update(Request $request, $id)
     {
-        //
+        $requests = $request->all();
+        $tailor  = Tailor::find($id);
+        if($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $destinationPath = 'uploads';
+            $path  = $file->move($destinationPath,$file->getClientOriginalName());
+            $requests['photo_url'] = $path->getPathname();
+        }
+
+
+        $tailor->update($requests);
+
+        return redirect()->route('tailors.index');
     }
 
     /**

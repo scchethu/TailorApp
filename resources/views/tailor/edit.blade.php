@@ -8,9 +8,14 @@
 
 @section('content')
 <div>
-    <form action="{{route('tailors.store')}}" method="post">
+    <form action="{{route('tailors.update',$user->id)}}" method="post" enctype="multipart/form-data">
         @csrf
+        @method('put')
         <div class="form-group">
+            <label for="">Select QR code</label>
+           <div>
+               <img class="img-fluid" style="height: 100px" src="{{asset($user->photo_url)}}" alt="">
+           </div>
             <input class="form-control" type="file" name="photo" placeholder="Profile Photo" id="">
         </div>
         <div class="form-group">
@@ -27,6 +32,26 @@
         </div>
         <input type="submit" value="Update">
     </form>
+    <div>
+        <h1>Add my work</h1>
+        <div class="row p-3 m-2">
+        @foreach($user->medias as $file)
+            <div class="col-md-3 m-2">
+                <img class="card m-3 p-2" style="width: 300px" src="{{asset($file->media_url)}}" alt="">
+        </div>
+        @endforeach
+        </div>
+        <form class="card p-3" action="{{route('tailors.add_work')}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <input type="hidden" name="user_id" value="{{$user->id}}">
+                <input class="form-control" type="file" name="photo" placeholder="Profile Photo" id="">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Add">
+            </div>
+        </form>
+    </div>
 </div>
 @stop
 
